@@ -1,0 +1,19 @@
+html,
+body {
+  height: 100%;
+}
+
+.INPUTLINK {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.INPUTLINK .form-floating:focus-within {
+  z-index: 2;
+}
+
+.INPUTLINK input[type="link"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}

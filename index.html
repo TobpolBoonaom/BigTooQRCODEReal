@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <head>
+      <link rel="icon" href="nongqrTure.png" type="image/x-icon">
+    <script src="color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>QrGenBigToo</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        user-select: none;
+      }
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+      .qr-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      #downloadBtn {
+        display: none;
+        margin-top: 20px;
+      }
+    </style>
+
+    <link href="QR.css" rel="stylesheet">
+  </head>
+  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="INPUTLINK w-100 m-auto">
+      <center><img src="nongqrTure.png" width="150"></center>
+      <form id="qrForm">
+        <center><h1 class="h3 mb-3 fw-normal">QrGenBigToo</h1></center>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Enter any data">
+          <label for="floatingInput">Please input the data here</label>
+        </div>
+        <button class="btn btn-primary w-100 py-2" type="submit">Generate QR Code</button>
+      </form>
+
+      <div id="qrcode" class="qr-container"></div>
+      <button id="downloadBtn" class="btn btn-success">Download QR Code</button>
+    </main>
+
+    <script>
+      document.getElementById('qrForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+
+        const qrcodeContainer = document.getElementById('qrcode');
+        qrcodeContainer.innerHTML = '';
+
+        document.getElementById('downloadBtn').style.display = 'none';
+
+        const data = document.getElementById('floatingInput').value;
+
+        const qrcode = new QRCode(qrcodeContainer, {
+          text: data,
+          width: 256,
+          height: 256,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+        });
+
+    
+        setTimeout(function() {
+          const canvas = qrcodeContainer.querySelector('canvas');
+          if (canvas) {
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.style.display = 'block';
+
+            downloadBtn.addEventListener('click', function() {
+              const image = canvas.toDataURL("image/png");
+              const link = document.createElement('a');
+              link.href = image;
+              link.download = 'qrcode.png';
+              link.click();
+            });
+          }
+        }, 300);
+      });
+    </script>
+    <script src="bootstrap.bundle.min.js"></script>
+  </body>
+</html>
